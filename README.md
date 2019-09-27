@@ -20,7 +20,7 @@ Although this guide may work on actual Macs, no promise is made. This guide is i
 
 Create 2 folders in a location of your choice(Terminal commands assume desktop), one named backup & another folder named modified. The modification folder is required for some changes we will be making
 
-##Change icon
+## Change icon
 
 #### Prerequisite
 
