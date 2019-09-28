@@ -1,4 +1,10 @@
-# Customizing about this mac
+---
+description: >-
+  Want to show your actual CPU? Want an absolutely cursed image in your about
+  this Mac? Follow this easy guide!
+---
+
+# Introduction
 
 Want to show your actual CPU? Want an absolutely cursed image in your about this Mac? Follow this easy guide!
 
