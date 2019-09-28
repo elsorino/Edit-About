@@ -12,7 +12,7 @@ Want to show your actual CPU? Want an absolutely cursed image in your about this
 * [iOSLocalizationEditor](https://github.com/igorkulman/iOSLocalizationEditor) to edit .strings file
 * SIP must be disabled temporarily. It can be reenabled afterwards
 
-Although this guide may work on actual Macs, no promise is made. This guide is intended for hackintoshes only.
+Although this guide may work on actual Macs, no promise is made. This guide is intended for hackintoshes only, changes made are purely cosmetic and cannot be used to e.g upgrade to Mojave on an old Mac
 
 ### Preparation
 
@@ -26,9 +26,9 @@ Create or download yourself a squared, preferably 512x512 .png file you will use
 
 #### Steps to replace
 
-Open a Terminal window and paste the following `cp /Applications/Utilities/System\ Information.app/Contents/Resources/Assets.car ~/Desktop/modified/ && cp /Applications/Utilities/System\ Information.app/Contents/Resources/Assets.car ~/Desktop/backup/` Hit enter, then hit the up arrow key and replace modified with backup. This will copy the original file to both locations.
+Open a Terminal window and paste the following `cp /Applications/Utilities/System\ Information.app/Contents/Resources/Assets.car ~/Desktop/modified/ && cp /Applications/Utilities/System\ Information.app/Contents/Resources/Assets.car ~/Desktop/backup/`  This will copy the original file to both locations.
 
-Open ThemeEngine and click the File option and choose Open, Select the file in your modification folder and open Assets.car:
+Open ThemeEngine and click the File option and choose Open, Select the file in your modification folder and open Assets.car. Scroll down on the left sidebar until you get to SystemLogo:
 
 ![Before](.gitbook/assets/before-icon.png)
 
