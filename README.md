@@ -1,4 +1,4 @@
-# Initial page
+# Change About This Mac
 
 Want to show your actual CPU? Want an absolutely cursed image in your about this Mac? Follow this easy guide!
 
