@@ -1,5 +1,4 @@
-# Now available as a ![Gitbook](https://elso.gitbook.io/about-this-mac/)
-
+# Now available as a [Gitbook!](https://elso.gitbook.io/about-this-mac/)
 
 
 
