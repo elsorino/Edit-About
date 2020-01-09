@@ -1,10 +1,3 @@
-# Now available as a [Gitbook!](https://elso.gitbook.io/edit-about/)
-
-
-
-
-
-
 # Change About This Mac
 
 
