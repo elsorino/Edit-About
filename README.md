@@ -1,34 +1,34 @@
-# Now available as a [Gitbook!](https://elso.gitbook.io/edit-about/)
-
-
-
-
-
-
 # Change About This Mac
-
 
 Want to show your actual CPU? Want an absolutely cursed image in your about this Mac? Follow this easy guide!
 
 #### Requirements
 
-* macOS Mojave
+* macOS Mojave/Catalina
 * Xcode for plist/hex editor
-  * Alternative plist editor of choice
+  * Alternative .plist editor of choice
   * Alternative hex editor of choice
-* [ThemeEngine](https://github.com/alexzielenski/ThemeEngine/releases) to edit .car files
-* [iOSLocalizationEditor](https://github.com/igorkulman/iOSLocalizationEditor) to edit .strings file
+  * Alternate .strings editor of choice
+* [ThemeEngine](https://github.com/alexzielenski/ThemeEngine/releases) to edit .car files(Mojave only, see note below)
 * SIP must be disabled temporarily. It can be reenabled afterwards
 
-Although this guide may work on actual Macs, no promise is made. This guide is intended for hackintoshes only, changes made are purely cosmetic and cannot be used to e.g upgrade to Mojave on an old Mac
+Although this guide may work on actual Macs, no promise is made. This guide is intended for hackintoshes only, changes made are purely cosmetic.
+
+##### Catalina Compatability
+
+Currently, ThemeEngine is not working on Catalina, as it is the only method I could find of editing .car files, this means you cannot currently change the icon in About this Mac.
+
+In addition, on Catalina, root must be mounted read/write. To do this paste in a terminal `sudo mount -uw /` then hit enter. This will prompt for your password, enter it and you will be able to change all files on your Catalina system.
 
 ### Preparation
 
-Create 2 folders in a location of your choice\(Terminal commands assume desktop\), one named backup & another folder named modified. The modification folder is required for some changes we will be making
+Create 2 folders in a location of your choice\(Terminal commands assume desktop\), one named backup & another folder named modified. The backup folder serves as a backup obviously, while we will make actual changes in the modified folder.
 
-## Change icon
+## Change icon(Currently Mojave only)
 
 #### Prerequisite
+
+As stated above, ThemeEngine only works on Mojave at the moment, it is required for editing .car files
 
 Create or download yourself a squared, preferably 512x512 .png file you will use
 
@@ -48,7 +48,7 @@ To replace the system icon, drag a .png file over the version you wish to replac
 
 When you're done, hit ⌘WinKey+S to save the Assets.car file
 
-After this, return to the terminal window and type `sudo mv ~/Desktop/modified/Assets.car /Applications/Utilities/System\ Information.app/Contents/Resources/Assets.car` Hit enter, then it will prompt for your password. Enter your password\(it will not appear to be typing, but it is\) and hit enter. This replaces the original file with the new modified one.
+After this, return to the terminal window and type `sudo cp ~/Desktop/modified/Assets.car /Applications/Utilities/System\ Information.app/Contents/Resources/Assets.car` Hit enter, then it will prompt for your password. Enter your password, this replaces the original file with the new modified one.
 
 NOTE: If you get permission error after entering the command, you have SIP enabled
 
@@ -76,33 +76,39 @@ Edit the Value part however you want. I'm going to set my motherboard name here 
 
 Save the file and reboot for changes to take effect:
 
-![Screen Shot 2019-09-26 at 22.28.27](.gitbook/assets/beforecpu.png)
+
+
+![Screen Shot 2020-01-08 at 8.12.38 PM.png](https://raw.githubusercontent.com/elsorino/Edit-About/master/2020/01/08-20-12-40-Screen%20Shot%202020-01-08%20at%208.12.38%20PM.png)
 
 ## Changing CPU name
 
-#### Prerequisite
-
-CPU type in Clover must be set to `Unknown` Your milage may vary on how safe this is, but I had no issues changing this.
-
-#### Steps to edit
-
-Copy the original file with `cp /System/Library/PrivateFrameworks/AppleSystemInfo.framework/Versions/A/Resources/en.lproj/AppleSystemInfo.strings ~/Desktop/backup/ && cp /System/Library/PrivateFrameworks/AppleSystemInfo.framework/Versions/A/Resources/en.lproj/AppleSystemInfo.strings ~/Desktop/backup/`
+Copy the original file with `cp /System/Library/PrivateFrameworks/AppleSystemInfo.framework/Versions/A/Resources/en.lproj/AppleSystemInfo.strings ~/Desktop/backup/ && cp /System/Library/PrivateFrameworks/AppleSystemInfo.framework/Versions/A/Resources/en.lproj/AppleSystemInfo.strings ~/Desktop/modified/`
 
 This assumes you are using english as your system language.
 
-Afterwards open AppleSystemInfo.strings in your modified folder with LocalizationEditor, scrolling down until you see UnknownCpuKind modified as Unknown:
+The next step depends on what the CPU shows up in About this Mac already.
 
-![Screen Shot 2019-09-26 at 22.58.39](.gitbook/assets/localeditor.png)
+##### Unknown cpu
 
-Edit the modified part to whatever you want it to be. I will be setting it to my CPU name.
 
-There is no manual save/undo action, once you are done exit Localizationeditor.
 
-To apply your changes, insert the following into a terminal `sudo mv ~/Desktop/modified/AppleSystemInfo.strings /System/Library/PrivateFrameworks/AppleSystemInfo.framework/Versions/A/Resources/en.lproj/AppleSystemInfo.strings` This will prompt for your password, enter it and hit enter.
+![Screen Shot 2020-01-08 at 7.49.04 PM.png](https://raw.githubusercontent.com/elsorino/Edit-About/master/2020/01/08-19-49-11-Screen%20Shot%202020-01-08%20at%207.49.04%20PM.png)
 
-Once this is done, reboot for your changes to take effect:
+If your CPU shows up as unknown, then change the Unknown string to the right of UnknownCPUKind
 
-![Screen Shot 2019-09-26 at 23.13.34-9557342](.gitbook/assets/2ndlast.png)
+##### Non-unknown Processor
+
+If like me, your processor partially shows, then you instead will instead change SpeedAndTypeFormat to IntelSpeedAndTypeFormat. After this, to the right of IntelSpeedAndTypeFormat, if you wish to change the CPU frequency edit the "%1\$d" string. To edit the rest of it, replace the "%2\$@" with what you want. I will be putting my CPU name there, while moving the CPU frequency part so it appears after the CPU name.
+
+![Screen Shot 2020-01-08 at 8.03.43 PM.png](https://raw.githubusercontent.com/elsorino/Edit-About/master/2020/01/08-20-03-48-Screen%20Shot%202020-01-08%20at%208.03.43%20PM.png)
+
+Once you are done, save and exit xcode.
+
+To apply your changes, insert the following into a terminal `sudo cp ~/Desktop/modified/AppleSystemInfo.strings /System/Library/PrivateFrameworks/AppleSystemInfo.framework/Versions/A/Resources/en.lproj/AppleSystemInfo.strings` This will prompt for your password, enter it and hit enter.
+
+After this, open About this Mac to see your changes:
+
+![Screen Shot 2020-01-08 at 8.14.53 PM.png](https://raw.githubusercontent.com/elsorino/Edit-About/master/2020/01/08-20-14-59-Screen%20Shot%202020-01-08%20at%208.14.53%20PM.png)
 
 ## Changing OS name
 
@@ -112,7 +118,9 @@ The name you wish to use must be exactly 12 characters, spaces are allowed so if
 
 #### Steps to edit
 
-Start by backing up the file with `cp /Applications/Utilities/System\ Information.app/Contents/MacOS/System\ Information ~/Desktop/modified/ && cp /Applications/Utilities/System\ Information.app/Contents/MacOS/System\ Information ~/Desktop/backup/`
+Start by backing up the file with `cp /System/Applications/Utilities/System\ Information.app/Contents/MacOS/System\ Information ~/Desktop/modified/ && cp /System/Applications/Utilities/System\ Information.app/Contents/MacOS/System\ Information ~/Desktop/backup/`
+
+NOTE: On Mojave, it is located on /Applications instead of /System/Applications
 
 After this, `cd ~/Desktop/modified` and run this command to remove the signature from the executable: `codesign --remove-signature System\ Information` This is required since we are modifying the binary directly.
 
@@ -120,15 +128,15 @@ If you're using Xcode, to open the binary in the hex editor, open Xcode &gt; Fil
 
 ![Screen Shot 2019-09-26 at 23.44.37](.gitbook/assets/hexeditor.png)
 
-Hit CMD/Winkey + F to search for MacOS Mojave. On the very left side, this should be numbered at 334495.
+Hit CMD/Winkey + F to search for MacOS Mojave/Catalina. On the very left side, this should be numbered at 334495.
 
-Now edit the MacOS Mojave text to anything less or equal to 12 characters. Remember that if it is less than 12 characters, add extra spaces until it is 12 characters.
+Now edit the MacOS Mojave/Catalina text to anything less or equal to 12 characters. Remember that if it is less than 12 characters, add extra spaces until it is 12 characters.
 
-After this, save your work and exit Xcode.
+After this, save and exit Xcode.
 
 Enter this into the terminal to replace the original binary with our modified one:
 
-`sudo mv ~/Desktop/modified/System\ Information /Applications/Utilities/System\ Information.app/Contents/MacOS/System\ Information`
+`sudo cp ~/Desktop/modified/System\ Information /Applications/Utilities/System\ Information.app/Contents/MacOS/System\ Information`
 
 After this, you can open About this Mac and your results should appear:
 
@@ -136,7 +144,10 @@ After this, you can open About this Mac and your results should appear:
 
 ## Finish
 
-Now that this is done, you can reboot with SIP enabled, and you should be good!
+Now that you're is done, you can reboot with SIP enabled, and you should be good!
 
-Errors? Something wrong? Open an issue and I'll get to it.
+Errors? Something wrong? Open an issue or add me on Discord at elso#0307 and we'll discuss it.
+
+
+
 
